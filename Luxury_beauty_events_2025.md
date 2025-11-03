@@ -1,11 +1,9 @@
----
-title: "Markdown_Luxury Beauty Events 2025"
-author: "Giang Nguyen"
-date: "`r Sys.Date()`"
-output: github_document
----
+Analyzing Luxury Beauty Events KPIs 2025
+================
+Giang Nguyen
+2025-11-03
 
-Using SQL (BigQuery) thoughout this analysis and Tableau to display the
+Using SQL (BigQuery) throughout this analysis and Tableau to display the
 visualizations.
 
 ## Step 1: ASK
@@ -44,7 +42,7 @@ Following these steps to get into the tool - BigQuery:
 -   Inside that dataset, create a new table (e.g.,
     luxury_cosmetics_popups): When creating the table, choose 'Upload'
     as the source, select your luxury_cosmetics_popups.csv file, and let
-    BigQuery auto-detect the schema.
+    BigQuery auto-detects the schema.
 
 We have now "prepared" the data by loading it into our data warehouse.
 
@@ -66,7 +64,7 @@ HAVING
   num_rows > 1;
 ```
 
-There is no duplicated events.
+There is no duplicate event.
 
 ```{sql Check for nulls in key columns}
 SELECT
@@ -77,7 +75,7 @@ FROM
   `your-project.luxury_popups.events_raw`;
 ```
 
-47 values are missed in the 'city' column, and missing 36 values in the
+47 values are missing in the 'city' column, and 36 values in the
 'end_date' column.
 
 ### 3.2: Create a clean, transformed table.
@@ -95,7 +93,7 @@ CREATE OR REPLACE TABLE `beauty-pop-up-events-2025.beauty_popups.processed_popup
     location_type,
     event_type,
     
-    -- Columns are already DATE type (since BigQuery auto-detect the schema), just alias them for clarity
+    -- Columns are already DATE type (since BigQuery auto-detects the schema), just alias them for clarity
     start_date AS clean_start_date,
     end_date AS clean_end_date,
     
@@ -120,14 +118,14 @@ CREATE OR REPLACE TABLE `beauty-pop-up-events-2025.beauty_popups.processed_popup
 );
 ```
 
-From now on, we will only use `processed_popups` table for our analysis.
+From now on, we will only use the `processed_popups` table for our analysis.
 
 ## Step 4: ANALYZE
 
 Now, we answer the "Ask" questions using SQL queries based on the clean
 table `processed_popups`.
 
-### 4.1: Determine top 5 brands by total revenue
+### 4.1: Determine the top 5 brands by total revenue
 
 ```{sql Top 5 brands by total revenue}
 SELECT
@@ -142,10 +140,10 @@ ORDER BY
 LIMIT 5;
 ```
 
-Top 5 by revene includes: YSL Beauty, Estée Lauder, Sisley-Paris,
+Top 5 by revenue includes: YSL Beauty, Estée Lauder, Sisley-Paris,
 Hourglass, and Chanel.
 
-### 4.2: Address the concern how do location type impact sales and footfall
+### 4.2: Address the concern about how location type impacts sales and footfall
 
 ```{sql How do location types compare}
 SELECT
@@ -161,7 +159,10 @@ ORDER BY
   total_revenue DESC;
 ```
 
-The result is sorted by total revenue: ![](compare_location.png) 
+The result is sorted by total revenue: 
+
+![](compare_location.png) 
+
 ### 4.3: Clarify the most effective event types
 
 ```{sql What is the most effective event type?}
@@ -209,7 +210,7 @@ ORDER BY
   avg_units_sold_per_event DESC;
 ```
 
-The medium lease duration (31-90 days) has greater average units sold
+The medium lease duration (31-90 days) has a greater average units sold
 than the short lease duration (1-30 days).
 
 ![](lease%20duration_vs_%20units%20sold.png) 
@@ -228,7 +229,7 @@ ORDER BY
   start_quarter;
 ```
 
-The second quarter has the greatest total revenue, and the fourth has
+The second quarter has the greatest total revenue, and the fourth quarter has
 the least revenue in the year 2025.
 
 ## Step 5: SHARE
