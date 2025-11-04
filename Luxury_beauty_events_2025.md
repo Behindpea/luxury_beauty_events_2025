@@ -45,6 +45,7 @@ Following these steps to get into the tool - BigQuery:
     BigQuery auto-detects the schema.
 
 We have now "prepared" the data by loading it into our data warehouse.
+
 (*) The luxury_cosmetics_popups.csv is a published dataset on the [Kaggle](https://www.kaggle.com/datasets/pratyushpuri/luxury-beauty-cosmetics-popup-events-kpi-2025/data) platform.
 
 ## Step 3: PROCESS
