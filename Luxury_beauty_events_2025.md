@@ -41,10 +41,11 @@ Following these steps to get into the tool - BigQuery:
 
 -   Inside that dataset, create a new table (e.g.,
     luxury_cosmetics_popups): When creating the table, choose 'Upload'
-    as the source, select your luxury_cosmetics_popups.csv file, and let
+    as the source, select the luxury_cosmetics_popups.csv (*) file, and let
     BigQuery auto-detects the schema.
 
 We have now "prepared" the data by loading it into our data warehouse.
+(*) The luxury_cosmetics_popups.csv is a published dataset on the [Kaggle](https://www.kaggle.com/datasets/pratyushpuri/luxury-beauty-cosmetics-popup-events-kpi-2025/data) platform.
 
 ## Step 3: PROCESS
 
